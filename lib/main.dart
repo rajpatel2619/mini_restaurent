@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_restaurent/screens/categories_screen.dart';
 import 'package:mini_restaurent/screens/category_meals_screen.dart';
 import 'package:mini_restaurent/screens/meal_detail.dart';
+import 'package:mini_restaurent/screens/tabs_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       // home: CategoriesScreen(),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => CategoriesScreen(),
+        '/': (ctx) => TabsScreen(),
         '/meal-detail': (ctx) => MealDetail(),
         '/category-meals': (ctx) => CategoryMealsScreen(),
       },
