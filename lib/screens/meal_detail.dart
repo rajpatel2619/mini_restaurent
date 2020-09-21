@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import '../dummy_data.dart';
 
 class MealDetail extends StatelessWidget {
+  final Function toggleFavorite;
+  final Function isMealFavorite;
+  MealDetail(this.toggleFavorite,this.isMealFavorite);
+
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -40,7 +44,7 @@ class MealDetail extends StatelessWidget {
         title: Text(selectedMeal.title),
       ),
       body: SingleChildScrollView(
-              child: Column(
+        child: Column(
           children: [
             Container(
               height: 300,
@@ -65,21 +69,30 @@ class MealDetail extends StatelessWidget {
             ),
             buildSectionTitle(context, 'Steps'),
             buildContainer(ListView.builder(
-              itemBuilder: (ctx, index) => Column(children: [
-                ListTile(
-                leading: CircleAvatar(
-                  child: Text('# ${index + 1}'),
-                ),
-                title: Text(selectedMeal.steps[index]),
+              itemBuilder: (ctx, index) => Column(
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      child: Text('# ${index + 1}'),
+                    ),
+                    title: Text(selectedMeal.steps[index]),
+                  ),
+                  Divider()
+                ],
               ),
-              Divider()
-              ],),
               itemCount: selectedMeal.steps.length,
+            )),
+            SizedBox(
+              height: 30,
             )
-            ),
-            SizedBox(height: 30,)
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          isMealFavorite(mealId) ? Icons.star : Icons.star_border,
+          ),
+        onPressed:()=> toggleFavorite(mealId),
       ),
     );
   }
